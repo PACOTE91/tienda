@@ -59,44 +59,41 @@ if (isset($_POST['crear'])) {
 
 ?>
 
-    <!DOCTYPE html>
-    <html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Actualizar Artículos</title>
-    </head>
-    <!-- CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" type="text/css">
+    <title>Actualizar Artículos</title>
+</head>
+<!-- CSS -->
+<link rel="stylesheet" href="../bootstrap.css" type="text/css">
 
 
-    <style>
-        label {
-            padding-top: 10px;
-            padding-bottom: 10px
-        }
+<style>
+label {
+    padding-top: 10px;
+    padding-bottom: 10px
+}
 
-        H1{
-            text-align: center;
-        }
+h1 {
+    text-align: center;
+}
 
-        body {
-            background: rgb(34, 193, 195);
-            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%);
-        }
+body {
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%);
+}
 
-        .card{
-            width:50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+.card {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
 
 
 
@@ -105,23 +102,24 @@ if (isset($_POST['crear'])) {
 
 
 
-    <body style="margin:20px">
+<body style="margin:20px">
 
-        <h1>CREAR ARTÍCULO</h1>
+    <h1>CREAR ARTÍCULO</h1>
 
 
-        <div class="card">
-            <div class="card-body">
-                <form name=" actualiza" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
-                    <div class="form-group">
-                        <label for="iden"><b>ID</b></label>
-                        <input class="form-control" disabled type="text" id="iden" name="id" value="<?php echo $proximoid ?>">
-                    </div>
+    <div class="card">
+        <div class="card-body">
+            <form name=" actualiza" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
+                <div class="form-group">
+                    <label for="iden"><b>ID</b></label>
+                    <input class="form-control" disabled type="text" id="iden" name="id"
+                        value="<?php echo $proximoid ?>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="name"><b>NOMBRE ARTÍCULO</b></label>
-                        <input class="form-control" requiered type="text" id="nombre" name="nombre" placeholder="Nombre">
-                        <?php
+                <div class="form-group">
+                    <label for="name"><b>NOMBRE ARTÍCULO</b></label>
+                    <input class="form-control" requiered type="text" id="nombre" name="nombre" placeholder="Nombre">
+                    <?php
                         if (isset($_SESSION['errornombre'])) {
                             echo <<<TEXTO
                                 <div class="alert alert-warning mt-2" role="alert">
@@ -131,12 +129,13 @@ if (isset($_POST['crear'])) {
                             unset($_SESSION['errornombre']);
                         }
                         ?>
-                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="descrip"><b>PRECIO ARTÍCULO</b></label>
-                        <input class="form-control" type="text" id="precio" maxlength="6" requiered name="precio" placeholder="Precio formato 000.00">
-                        <?php
+                <div class="form-group">
+                    <label for="descrip"><b>PRECIO ARTÍCULO</b></label>
+                    <input class="form-control" type="text" id="precio" maxlength="6" requiered name="precio"
+                        placeholder="Precio formato 000.00">
+                    <?php
                         if (isset($_SESSION['errorprecio'])) {
                             echo <<<TEXTO
                                 <div class="alert alert-warning mt-2" role="alert">
@@ -146,40 +145,37 @@ if (isset($_POST['crear'])) {
                             unset($_SESSION['errorprecio']);
                         }
                         ?>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="categoria"><b>CATEGORÍA</b></label>
-                        <select class="form-control" name="categoria">
-                            <?php
+                </div>
+                <div class="form-group">
+                    <label for="categoria"><b>CATEGORÍA</b></label>
+                    <select class="form-control" name="categoria">
+                        <?php
                             while ($fila = $categorias->fetch(PDO::FETCH_OBJ)) {
                                 echo "<option value=\"{$fila->id}\">{$fila->nombre}</option>";
                             }
                             ?>
-                        </select>
-                    </div>
-
-
-                    <button class="btn btn-secondary m-2" type="button" onclick="borracampos()">Borrar</button>
-                    <button name="crear" class="btn btn-primary m-2" type="submit">Crear</button>
-            </div>
+                    </select>
+                </div>
+                <button class="btn btn-secondary m-2" type="button" onclick="borracampos()">Borrar</button>
+                <button name="crear" class="btn btn-primary m-2" type="submit">Crear</button>
         </div>
+    </div>
 
 
-        </form>
+    </form>
 
-        <script>
-            function borracampos() {
-                document.getElementById("nombre").value = "";
-                document.getElementById("precio").value = "";
-            }
-        </script>
-
-
+    <script>
+    function borracampos() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("precio").value = "";
+    }
+    </script>
 
 
-    </body>
 
-    </html>
+
+</body>
+
+</html>
 
 <?php } ?>

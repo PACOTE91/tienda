@@ -25,14 +25,17 @@ class Articulos extends Conexion
     }
 
     /*
-        #################
-              CRUD
-        #################
+          #################
+    ******************************
+                CRUD
+    ******************************
+          #################
     */
 
 
 
-    //Borrar un registro por id
+    //Borrar un registro en funcion del ID pasado por parámetro
+    // *****************************************************************************    
     public function borra($id)
     {
         $sql = "DELETE FROM articulos WHERE id=$id";
@@ -45,11 +48,12 @@ class Articulos extends Conexion
         }
         parent::$conexion = null;
     }
-
+    // *****************************************************************************    
 
 
 
     //Esta funcion inserta elementos en nuestra BD
+    // *****************************************************************************   
     public function crear()
     {
         $sql = "INSERT INTO articulos (nombre, precio, categoria_id) VALUES (:n,:p,:c)";
@@ -66,9 +70,13 @@ class Articulos extends Conexion
         }
         parent::$conexion = null;
     }
+    // *****************************************************************************    
 
 
-    //Lee todos los registros
+
+
+    //Esta funcion lee todos los registros de nuestra BD
+    // *****************************************************************************   
     public function leer_todos()
     {
         $sql = "SELECT * FROM articulos";
@@ -82,8 +90,13 @@ class Articulos extends Conexion
         parent::$conexion = null;
         return $stmt;
     }
+    //*********************************************************************************** */   
 
-    //Actualiza un registro pasado id por parámetro
+
+
+
+    //Esta funcion inserta elementos en nuestra BD
+    // *****************************************************************************   
     public function actualizar($id)
     {
         $sql = "UPDATE articulos SET nombre=:n, precio=:p, categoria_id=:c WHERE id={$id}";
@@ -116,10 +129,10 @@ class Articulos extends Conexion
 
         try {
             $stmt->execute();
-            while($ids=$stmt->fetch(PDO::FETCH_OBJ)){
-                $proxid=$ids->id;
+            while ($ids = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $proxid = $ids->id;
             }
-            $proxid=$proxid+1;
+            $proxid = $proxid + 1;
         } catch (PDOException $ex) {
             die("Error en la devolución del ID" . $ex->getMessage());
         }
@@ -180,42 +193,41 @@ class Articulos extends Conexion
         } catch (PDOException $ex) {
             die("Error en la lectura del ID: $id" . $ex->getMessage());
         }
-        return ($stmt->rowCount()==1);
+        return ($stmt->rowCount() == 1);
     }
 
 
-  
-    public function valorafiltrar($columna,$id)
+
+    public function valorafiltrar($columna, $id)
     {
         $sql = "SELECT {$columna} FROM articulos WHERE id=$id";
         $stmt = parent::$conexion->prepare($sql);
 
         try {
-            $stmt->execute();            
-
+            $stmt->execute();
         } catch (PDOException $ex) {
             die("Error al devolver el filtro..." . $ex->getMessage());
-        }       
+        }
         parent::$conexion = null;
         return $stmt;
     }
- 
- 
-    public function filtrar($campo,$valor){
-     $sql="SELECT * FROM articulos WHERE $campo='{$valor}'";
-     var_dump($sql);
-     $stmt=parent::$conexion->prepare($sql);
- 
-     try{
-         $stmt->execute();
-     }catch(PDOException $ex){
-         die("Error al filtrar ".$ex->getMessage());
-     }
-     parent::$conexion = null;
-     return $stmt;
- 
- }
- 
+
+
+    public function filtrar($campo, $valor)
+    {
+        $sql = "SELECT * FROM articulos WHERE $campo='{$valor}'";
+        var_dump($sql);
+        $stmt = parent::$conexion->prepare($sql);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al filtrar " . $ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt;
+    }
+
 
 
 

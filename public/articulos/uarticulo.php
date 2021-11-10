@@ -71,58 +71,57 @@ if (isset($_POST['actualizar'])) {
 
 ?>
 
-    <!DOCTYPE html>
-    <html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Actualizar Artículos</title>
-    </head>
-    <!-- CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../bootstrap.css" type="text/css">
+    <title>Actualizar Artículos</title>
+</head>
+<!-- CSS -->
+<link rel="stylesheet" href="../bootstrap.css" type="text/css">
 
-    <style>
-        label {
-            padding-top: 10px;
-            padding-bottom: 10px
-        }
+<style>
+label {
+    padding-top: 10px;
+    padding-bottom: 10px
+}
 
-        body {
-            background: rgb(34, 193, 195);
-            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%);
-        }
+body {
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%);
+}
 
-        .card{
-            width:50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+.card {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
 
 
-    <body style="margin:20px">
+<body style="margin:20px">
 
-        <h1>Actualizar Artículo <?php echo $id ?></h1>
+    <h1>Actualizar Artículo <?php echo $id ?></h1>
 
 
-        <form name="actualiza" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
-            <div class="card">
-                <div class="card-body">
+    <form name="actualiza" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
+        <div class="card">
+            <div class="card-body">
 
-                    <div class="form-group">
-                        <label for="iden">ID</label>
-                        <input class="form-control" disabled type="text" id="iden" name="id" value="<?php echo $id ?>">    
-                    </div>
+                <div class="form-group">
+                    <label for="iden">ID</label>
+                    <input class="form-control" disabled type="text" id="iden" name="id" value="<?php echo $id ?>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="name">Nombre Articulo</label>
-                        <input class="form-control" type="text" id="nombre" name="nombre" requiered value="<?php echo $articulo->nombre ?>" placeholder="Nombre">
-                        <?php
+                <div class="form-group">
+                    <label for="name">Nombre Articulo</label>
+                    <input class="form-control" type="text" id="nombre" name="nombre" requiered
+                        value="<?php echo $articulo->nombre ?>" placeholder="Nombre">
+                    <?php
                         if (isset($_SESSION['errornombre'])) {
                             echo <<<TEXTO
                                 <div class="alert alert-warning mt-2" role="alert">
@@ -132,12 +131,13 @@ if (isset($_POST['actualizar'])) {
                             unset($_SESSION['errornombre']);
                         }
                         ?>
-                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="descrip">Precio Artículo</label>
-                        <input class="form-control" type="text" id="precio" maxlength="6" requiered name="precio" value="<?php echo $articulo->precio ?>" placeholder="Precio formato 000.00">                        
-                        <?php
+                <div class="form-group">
+                    <label for="descrip">Precio Artículo</label>
+                    <input class="form-control" type="text" id="precio" maxlength="6" requiered name="precio"
+                        value="<?php echo $articulo->precio ?>" placeholder="Precio formato 000.00">
+                    <?php
                         if (isset($_SESSION['errorprecio'])) {
                             echo <<<TEXTO
                                 <div class="alert alert-warning mt-2" role="alert">
@@ -147,41 +147,41 @@ if (isset($_POST['actualizar'])) {
                             unset($_SESSION['errorprecio']);
                         }
                         ?>
-                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="categoria">ID Categoría</label>
-                        <select class="form-control" name="categoria">
-                            <?php
+                <div class="form-group">
+                    <label for="categoria">ID Categoría</label>
+                    <select class="form-control" name="categoria">
+                        <?php
                             while($fila=$categorias->fetch(PDO::FETCH_OBJ)){
                                echo "<option value=\"{$fila->id}\">{$fila->nombre}</option>";
 
                             }
                             ?>
-                        </select>
-                    </div>
-
-
-                    <button class="btn btn-secondary m-2" type="button" onclick="borracampos()">Borrar</button>
-                    <button name="actualizar" class="btn btn-primary m-2" type="submit">Actualizar</button>
+                    </select>
                 </div>
+
+
+                <button class="btn btn-secondary m-2" type="button" onclick="borracampos()">Borrar</button>
+                <button name="actualizar" class="btn btn-primary m-2" type="submit">Actualizar</button>
             </div>
+        </div>
 
 
-        </form>
+    </form>
 
-        <script>
-            function borracampos() {
-                document.getElementById("nombre").value = "";
-                document.getElementById("precio").value = "";
-            }
-        </script>
-
-
+    <script>
+    function borracampos() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("precio").value = "";
+    }
+    </script>
 
 
-    </body>
 
-    </html>
+
+</body>
+
+</html>
 
 <?php } ?>

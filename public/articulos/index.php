@@ -22,60 +22,61 @@ $articulos = (new Articulos)->leer_todos();
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Index Articulos</title>
+    <title>Index Articulos</title>
 </head>
 <!-- CSS -->
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../bootstrap.css" type="text/css">
 <link rel="stylesheet" href="../index.css" type="text/css">
 <link rel="stylesheet" href="../../../../FontAwesome/css/all.css" type="text/css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/r-2.2.9/datatables.min.css" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/r-2.2.9/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/r-2.2.9/datatables.min.css" />
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
 
 <style>
-  #cont {
+#cont {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    <?php
-    if (isset($_SESSION['mensaje'])) {
-      echo "margin-top: 15%;";
-    } else {
-      echo "margin-top: 8%;";
+
+    <?php if (isset($_SESSION['mensaje'])) {
+        echo "margin-top: 15%;";
     }
-    ?>
-    font-size: 100%
-  }
+
+    else {
+        echo "margin-top: 8%;";
+    }
+
+    ?>font-size: 100%
+}
 </style>
 
 
 <body>
 
-  <div id="navbar">
-    <h1 style="display:block">ARTICULOS</h1>
+    <div id="navbar">
+        <h1 style="display:block">ARTICULOS</h1>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Barra Navegación</a>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link" href="../index.php">Inicio</a>
-            <a class="nav-link" href="carticulo.php">Crear Artículo</a>
-            <a class="nav-link" href="../categorias/index.php">Categorias</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">Barra Navegación</a>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="../index.php">Inicio</a>
+                        <a class="nav-link" href="carticulo.php">Crear Artículo</a>
+                        <a class="nav-link" href="../categorias/index.php">Categorias</a>
 
-          </div>
+                    </div>
 
-        </div>
+                </div>
 
-      </div>
-    </nav>
-    <?php
+            </div>
+        </nav>
+        <?php
     if (isset($_SESSION['mensaje'])) {
       echo <<<TEXTO
                                 
@@ -86,31 +87,31 @@ $articulos = (new Articulos)->leer_todos();
       unset($_SESSION['mensaje']);
     }
     ?>
-  </div>
+    </div>
 
-  <div id="cont">
-    <h4 style="text-align:center;
+    <div id="cont">
+        <h4 style="text-align:center;
          background-color:teal;
          padding:5px;
          border-radius: 15px;">TABLA ARTICULOS</h4>
-    <table id="categorias" class="table table-dark">
+        <table id="categorias" class="table table-dark">
 
 
-      <!-- Mostramos mensaje proveniente de $_SESSION-->
+            <!-- Mostramos mensaje proveniente de $_SESSION-->
 
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th style="text-align:center" scope="col">Nombre artículo</th>
-          <th scope="col">Precio</th>
-          <th scope="col">Categoría</th>
-          <th scope="col">Acciones</th>
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th style="text-align:center" scope="col">Nombre artículo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Acciones</th>
 
-        </tr>
-      </thead>
-      <tbody>
+                </tr>
+            </thead>
+            <tbody>
 
-        <?php
+                <?php
         while ($fila = $articulos->fetch(PDO::FETCH_OBJ)) {
           echo <<<TEXTO
     <tr>
@@ -137,14 +138,14 @@ $articulos = (new Articulos)->leer_todos();
     TEXTO;
         }
         ?>
-      </tbody>
-    </table>
-  </div>
-  <script>
+            </tbody>
+        </table>
+    </div>
+    <script>
     $(document).ready(function() {
-      $('#categorias').DataTable();
+        $('#categorias').DataTable();
     });
-  </script>
+    </script>
 
 
 </body>

@@ -1,14 +1,8 @@
 <?php
 
-
-
-
-
-if(!isset($_POST['id']) && isset($_POST['nombre'])){    
+if(!isset($_POST['id']) || !isset($_POST['nombre'])){    
     header("Location:index.php");
 }
-var_dump($_POST);
-
 session_start();
 
 use Src\Categorias;

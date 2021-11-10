@@ -12,18 +12,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap.css" type="text/css">
     <style>
-        label {
-            padding-top: 10px;
-            padding-bottom: 10px
-        }
+    label {
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
 
-        body {
-            background: rgb(34, 193, 195);
-            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%);
-        }
-        h1{
-            text-align: center;
-        }
+    body {
+        background: rgb(34, 193, 195);
+        background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%);
+    }
+
+    h1 {
+        text-align: center;
+    }
     </style>
 
 </head>
@@ -33,7 +34,8 @@
     <div class="container-fluid">
         <div class="card" style="width: 50%;margin-left:auto;margin-right:auto">
             <div>
-                <img src="https://www.adrenalina.es/wp-content/uploads/2020/04/crear-tienda-online.png" alt="Card image cap">
+                <img src="https://www.adrenalina.es/wp-content/uploads/2020/04/crear-tienda-online.png"
+                    alt="Card image cap">
                 <div style="margin-left:10%">
                     <p>
                         <a class="navbar-brand" href="articulos/index.php">ARTÍCULOS</a>
