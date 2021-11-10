@@ -1,0 +1,20 @@
+{
+    "name": "paco/tienda",
+    "description": "Practica CRUD Tienda",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paco Fenoy",
+            "email": "pacomartinezalhabia@gmail.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.16"
+    }
+}

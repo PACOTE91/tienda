@@ -1,0 +1,35 @@
+tr,
+td {
+  vertical-align: middle
+}
+
+#navbar {
+  overflow: hidden;
+  position: fixed;
+  background: #ddd;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-left:auto;
+  margin-right:auto;
+
+}
+
+#navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+h1{
+    text-align: center;
+}
+
+label {
+  padding-top: 10px;
+  padding-bottom: 10px
+}
+
+body {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(45, 116, 253, 1) 100%); 
+}

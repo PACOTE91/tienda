@@ -1,0 +1,10 @@
+//Cambia el nombre del archivo a .config
+//Rellena las opciones de debajo con tus datos
+
+
+
+[bd]
+host=Servidor
+name=Nombre de la base de datos
+u=Tu usuario
+p=Tu contraseña
