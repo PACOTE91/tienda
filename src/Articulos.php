@@ -182,7 +182,8 @@ class Articulos extends Conexion
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-
+    //Con esta funcion devolvemos true si existe ese valor pasado
+    //o false sino existe
     public function existeid($id)
     {
         $sql = "SELECT * FROM articulos WHERE id=$id";
@@ -197,26 +198,25 @@ class Articulos extends Conexion
     }
 
 
-
-    public function valorafiltrar($columna, $id)
+    //Con el ID del ariculo y la columna a filtrar nos devolver el valor a partir del que filtraremos
+    public function valorafiltrar($categoria, $id)
     {
-        $sql = "SELECT {$columna} FROM articulos WHERE id=$id";
+        $sql = "SELECT $categoria FROM categorias WHERE id=$id";
         $stmt = parent::$conexion->prepare($sql);
-
         try {
             $stmt->execute();
         } catch (PDOException $ex) {
             die("Error al devolver el filtro..." . $ex->getMessage());
         }
         parent::$conexion = null;
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-
+    // Usando el valor que retorna la función anterior y la columna para la que queremos filtrar
+    // devolvemos el STMT para el que mosteriormente haremos un fetch(PDO::FETCH_OBJ)
     public function filtrar($campo, $valor)
     {
-        $sql = "SELECT * FROM articulos WHERE $campo='{$valor}'";
-        var_dump($sql);
+        $sql = "SELECT * WHERE $campo=$valor";
         $stmt = parent::$conexion->prepare($sql);
 
         try {

@@ -12,29 +12,30 @@ function hayError($n, $d)
     if (strlen($n) == 0) {
         $error = true;
         $_SESSION['errornombre'] = "Valor nombre vacío";
-    }else{
+    } else {
         if ((new Categorias)->uniquenombre($n) == 1) {
-        $error = true;
-        $_SESSION['duplicado'] = "Este nombre de Categoría ya existe !!";
-    }
+            $error = true;
+            $_SESSION['duplicado'] = "Este nombre de Categoría ya existe !!";
+        }
     }
 
     if (strlen($d) == 0) {
         $error = true;
         $_SESSION['errordescripcion'] = "Valor descripción vacío";
     }
-    
+
 
     return $error;
 }
 
+//Si se ha pulsado el boton de envio formulario y no hay error creamos el elemento
 if (isset($_POST['crear'])) {
     $nombre = trim(ucwords($_POST['nombre']));
     $descripcion = trim(ucwords($_POST['descripcion']));
 
     if (!hayError($nombre, $descripcion)) {
         (new Categorias)->setNombre($nombre)->setDescription($descripcion)->crear();
-        $_SESSION['mensaje']="<b>Categoría creada</b>";
+        $_SESSION['mensaje'] = "<b>Categoría creada</b>";
         header("Location:index.php");
     } else {
         header("Location:ccategoria.php");

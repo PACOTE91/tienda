@@ -4,8 +4,10 @@ session_start();
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Src\Categorias;
-
+//Creamos objeto Categorias y creamos elementos en nuestra BD
 (new Categorias)->categorias_generator(25);
+
+//Almacenamos en un objeto Categorías todos los elemeentos de nuestra BD
 $categorias = (new Categorias)->leerTodos();
 
 ?>
@@ -38,9 +40,8 @@ $categorias = (new Categorias)->leerTodos();
     margin-left: auto;
     margin-right: auto;
 
-    <?php if(isset($_SESSION['mensaje'])) {
+    <?php if (isset($_SESSION['mensaje'])) {
         echo "margin-top: 15%;";
-
     }
 
     else {
@@ -69,15 +70,15 @@ $categorias = (new Categorias)->leerTodos();
             </div>
         </nav>
         <?php
-    if (isset($_SESSION['mensaje'])) {
-      echo <<<TEXTO
+        if (isset($_SESSION['mensaje'])) {
+            echo <<<TEXTO
                               <div class="alert alert-success mt-2" role="alert">
                               {$_SESSION['mensaje']}
                               </div>
                               TEXTO;
-      unset($_SESSION['mensaje']);
-    }
-    ?>
+            unset($_SESSION['mensaje']);
+        }
+        ?>
     </div>
 
 
@@ -99,8 +100,9 @@ $categorias = (new Categorias)->leerTodos();
             </thead>
             <tbody>
                 <?php
-        while ($categoria = $categorias->fetch(PDO::FETCH_OBJ)) {
-          echo <<<TEXTO
+                //Sacamos los datos uno por uno            
+                while ($categoria = $categorias->fetch(PDO::FETCH_OBJ)) {
+                    echo <<<TEXTO
     <tr>
       <th style="width:10%" scope="row">{$categoria->id}</th>
       <td>{$categoria->nombre}</td>
@@ -126,8 +128,8 @@ $categorias = (new Categorias)->leerTodos();
 
     </tr>
   TEXTO;
-        }
-        ?>
+                }
+                ?>
 
             </tbody>
         </table>

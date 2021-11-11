@@ -19,7 +19,7 @@ class Categorias extends Conexion
 
     /*
     #####################
-        Constructor
+          Constructor
     #####################
 
     Llama al constructor de la función padre (Conexión)
@@ -126,7 +126,7 @@ class Categorias extends Conexion
     */
 
 
-    //Funcion que nos devuelve el nombre y el id de las categorías (para poder usarlos en artículos)
+    //Funcion que nos devuelve el nombre y el id de las categorías (para poder usarlos en creaccion de artículos)
     public function devuelveNombre()
     {
         $sql = "SELECT id, nombre FROM categorias";
@@ -187,9 +187,9 @@ class Categorias extends Conexion
     //Despues evaluaremos que si es 0, no existe registro, de lo contrario hay un valor duplicado.
     public function uniquenombre($nombre)
     {
-        if(isset($this->id)){
+        if (isset($this->id)) {
             $sql = "SELECT * FROM categorias WHERE id!={$this->id} AND nombre=:n";
-        }else{
+        } else {
             $sql = "SELECT * FROM categorias WHERE nombre=:n";
         }
         $stmt = parent::$conexion->prepare($sql);
@@ -225,51 +225,23 @@ class Categorias extends Conexion
     }
 
 
-   //Funcion que nos devuelve el nombre y el id de las categorías (para poder usarlos en artículos)
-   public function nombre($id)
-   {
-       $sql = "SELECT nombre FROM categorias WHERE id=$id";
-       $stmt = parent::$conexion->prepare($sql);
+    //Funcion que nos devuelve el nombre y el id de las categorías (para poder usarlos en artículos)
+    public function nombre($id)
+    {
+        $sql = "SELECT nombre FROM categorias WHERE id=$id";
+        $stmt = parent::$conexion->prepare($sql);
 
-       try {
-           $stmt->execute();
-       } catch (PDOException $ex) {
-           die("Error al comprobar si la base de datos está vacía");
-       }
-       parent::$conexion = null;
-       return $stmt;
-   }
-
-
-
-
-   public function valorafiltrar($categoria,$id)
-   {
-       $sql = "SELECT $categoria FROM categorias WHERE id=$id";
-       $stmt = parent::$conexion->prepare($sql);
-       try {
-           $stmt->execute();
-       } catch (PDOException $ex) {
-           die("Error al devolver el filtro..." . $ex->getMessage());
-       }       
-       parent::$conexion = null;
-       return $stmt->fetch(PDO::FETCH_OBJ);
-   }
-
-
-   public function filtrar($campo,$valor){
-    $sql="SELECT * WHERE $campo=$valor";
-    $stmt=parent::$conexion->prepare($sql);
-
-    try{
-        $stmt->execute();
-    }catch(PDOException $ex){
-        die("Error al filtrar ".$ex->getMessage());
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al comprobar si la base de datos está vacía");
+        }
+        parent::$conexion = null;
+        return $stmt;
     }
-    parent::$conexion = null;
-    return $stmt;
 
-}
+
+
 
     /**
      * Set the value of description

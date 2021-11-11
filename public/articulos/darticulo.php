@@ -9,9 +9,11 @@ require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Src\Categorias;
 use Src\Articulos;
-
+//Si existe el elemento pasado por GET
 if ((new Articulos)->existeid($_GET['id'])) {
+    //Traemos los datos de ese elemento y los almacenamos en esta variable
     $articulo = (new Articulos)->leeelemento($_GET['id']);
+    //Traemos el nombre de la categoria a partir de categoria_id
     $categoria = (new Categorias)->nombre($articulo->categoria_id)->fetch(PDO::FETCH_OBJ);
 } else {
     header("Location:index.php");
