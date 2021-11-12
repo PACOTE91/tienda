@@ -7,6 +7,7 @@ require dirname(__DIR__, 2) . "/vendor/autoload.php";
 use Src\Categorias;
 use Src\Articulos;
 
+// pattern = "^[0-9]{0,3}+([,|.][0-9]{0,2}+)?$"
 
 
 
@@ -30,7 +31,7 @@ function hayError($n, $d)
 {
     global $id;
     $error = false;
-    $l=strlen($d);
+    $l = strlen($d);
 
     if (strlen($n) == 0) {
         $error = true;
@@ -40,7 +41,7 @@ function hayError($n, $d)
     if (strlen($d) == 0) {
         $_SESSION['errorprecio'] = "Error precio vacío";
     }
-    $haypunto = substr($d,($l-3),1);
+    $haypunto = substr($d, ($l - 3), 1);
     //Con esto comprobamos que exise el punto antes de los ultimos dos decimales
     if (strcmp($haypunto, ".") != 0) {
         $_SESSION['errorprecio'] = "Error en el formato del numero";
@@ -54,7 +55,7 @@ function hayError($n, $d)
 if (isset($_POST['actualizar'])) {
     $nombre = trim(ucwords($_POST['nombre']));
     $precio = trim(ucwords($_POST['precio']));
-    $categoria=$_POST['categoria'];
+    $categoria = $_POST['categoria'];
 
     if (!hayError($nombre, $precio)) {
         (new Articulos)->setNombre($nombre)->setPrecio($precio)->setCategoria_id($categoria)->actualizar($id);
@@ -135,8 +136,9 @@ body {
 
                 <div class="form-group">
                     <label for="descrip">Precio Artículo</label>
-                    <input class="form-control" type="text" id="precio" maxlength="6" requiered name="precio"
-                        value="<?php echo $articulo->precio ?>" placeholder="Precio formato 000.00">
+                    <input class="form-control" type="text" id="precio" pattern="^[0-9]{0,3}([,\.][0-9]{0,2})?"
+                        requiered name="precio" value="<?php echo $articulo->precio ?>"
+                        placeholder="Precio formato 000.00">
                     <?php
                         if (isset($_SESSION['errorprecio'])) {
                             echo <<<TEXTO
@@ -153,9 +155,8 @@ body {
                     <label for="categoria">ID Categoría</label>
                     <select class="form-control" name="categoria">
                         <?php
-                            while($fila=$categorias->fetch(PDO::FETCH_OBJ)){
-                               echo "<option value=\"{$fila->id}\">{$fila->nombre}</option>";
-
+                            while ($fila = $categorias->fetch(PDO::FETCH_OBJ)) {
+                                echo "<option value=\"{$fila->id}\">{$fila->nombre}</option>";
                             }
                             ?>
                     </select>

@@ -8,10 +8,10 @@ use Src\Articulos;
 $numero = (new Articulos)->contarregistros();
 
 if ($numero == 0) {
-  (new Articulos)->generame(100);
+    (new Articulos)->generame(100);
 }
+
 $articulos = (new Articulos)->leer_todos();
-// }else{
 
 
 ?>
@@ -33,9 +33,11 @@ $articulos = (new Articulos)->leer_todos();
 <link rel="stylesheet" href="../index.css" type="text/css">
 <link rel="stylesheet" href="../../../../FontAwesome/css/all.css" type="text/css">
 <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/r-2.2.9/datatables.min.css" />
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/datatables.css" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/datatables.js">
+</script>
 
 <style>
 #cont {
@@ -77,16 +79,16 @@ $articulos = (new Articulos)->leer_todos();
             </div>
         </nav>
         <?php
-    if (isset($_SESSION['mensaje'])) {
-      echo <<<TEXTO
+        if (isset($_SESSION['mensaje'])) {
+            echo <<<TEXTO
                                 
                                 <div class="alert alert-success" role="alert">
                                 {$_SESSION['mensaje']}
                                 </div>
                                 TEXTO;
-      unset($_SESSION['mensaje']);
-    }
-    ?>
+            unset($_SESSION['mensaje']);
+        }
+        ?>
     </div>
 
     <div id="cont">
@@ -96,8 +98,6 @@ $articulos = (new Articulos)->leer_todos();
          border-radius: 15px;">TABLA ARTICULOS</h4>
         <table id="categorias" class="table table-dark">
 
-
-            <!-- Mostramos mensaje proveniente de $_SESSION-->
 
             <thead>
                 <tr>
@@ -112,8 +112,8 @@ $articulos = (new Articulos)->leer_todos();
             <tbody>
 
                 <?php
-        while ($fila = $articulos->fetch(PDO::FETCH_OBJ)) {
-          echo <<<TEXTO
+                while ($fila = $articulos->fetch(PDO::FETCH_OBJ)) {
+                    echo <<<TEXTO
     <tr>
       <th style="width:auto scope="row">
       <a href="darticulo.php?id={$fila->id}">$fila->id</a>
@@ -136,11 +136,12 @@ $articulos = (new Articulos)->leer_todos();
 
     </tr>
     TEXTO;
-        }
-        ?>
+                }
+                ?>
             </tbody>
         </table>
     </div>
+
     <script>
     $(document).ready(function() {
         $('#categorias').DataTable();

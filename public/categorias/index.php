@@ -30,9 +30,11 @@ $categorias = (new Categorias)->leerTodos();
 <link rel="stylesheet" href="../bootstrap.css" type="text/css">
 
 <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/r-2.2.9/datatables.min.css" />
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/datatables.css" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/datatables.js">
+</script>
 
 <style>
 #cont {

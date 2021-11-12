@@ -5,25 +5,28 @@ require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Src\Articulos;
 
-if(!isset($_POST['tipo']) || !isset($_POST['id'])){
+if (!isset($_POST['tipo']) || !isset($_POST['id'])) {
     header("Location:darticulo.php");
 }
 
-$columna=$_POST['tipo'];
-$id=$_POST['id'];
+$columna = $_POST['tipo'];
+$id = $_POST['id'];
 
 // var_dump($columna)."<br>";
 // var_dump($id)."<br>";
 
 //Almacenamos el valor para el que queremos buscar valores iguales
-$valor=(new Articulos)->valorafiltrar($columna,$id)->fetch(PDO::FETCH_OBJ);
-$valor=$valor->$columna;
+$valor = (new Articulos)->valorafiltrar($columna, $id);
 
-var_dump($valor)."<br>";
+$valor = $valor->$columna;
+echo "La columna es: " . $columna;
+echo "El valor es:" . $valor;
+
+
 
 
 //Vector con todos los regitros que coinciden con el valor que queremos filtrar
-$valorescoincidentes=(new Articulos)->filtrar($columna,$valor);
+$valorescoincidentes = (new Articulos)->filtrar($columna, $valor);
 
 ?>
 
@@ -42,11 +45,14 @@ $valorescoincidentes=(new Articulos)->filtrar($columna,$valor);
 <!-- CSS -->
 <link rel="stylesheet" href="../bootstrap.css" type="text/css">
 <link rel="stylesheet" href="../index.css" type="text/css">
+<!-- Hemos almacenado Font Awesome en local, ya que es la version con los iconos premium -->
 <link rel="stylesheet" href="../../../../FontAwesome/css/all.css" type="text/css">
 <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/r-2.2.9/datatables.min.css" />
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+    href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/datatables.css" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/datatables.js">
+</script>
 
 
 <style>
@@ -86,23 +92,23 @@ $valorescoincidentes=(new Articulos)->filtrar($columna,$valor);
             </div>
         </nav>
         <?php
-    if (isset($_SESSION['mensaje'])) {
-      echo <<<TEXTO
+        if (isset($_SESSION['mensaje'])) {
+            echo <<<TEXTO
                                 
                                 <div class="alert alert-success" role="alert">
                                 {$_SESSION['mensaje']}
                                 </div>
                                 TEXTO;
-      unset($_SESSION['mensaje']);
-    }
-    ?>
+            unset($_SESSION['mensaje']);
+        }
+        ?>
     </div>
 
     <div id="cont">
         <h4 style="text-align:center;
          background-color:teal;
          padding:5px;
-         border-radius: 15px;">FILTRANDO VALORES POR <?php echo '"'.strtoupper($columna).'"' ?></h4>
+         border-radius: 15px;">FILTRANDO VALORES POR <?php echo '"' . strtoupper($columna) . '"' ?></h4>
         <table id="categorias" class="table table-dark">
 
 
@@ -121,8 +127,8 @@ $valorescoincidentes=(new Articulos)->filtrar($columna,$valor);
             <tbody>
 
                 <?php
-        while ($fila = $valorescoincidentes->fetch(PDO::FETCH_OBJ)) {
-          echo <<<TEXTO
+                while ($fila = $valorescoincidentes->fetch(PDO::FETCH_OBJ)) {
+                    echo <<<TEXTO
     <tr>
       <th style="width:auto scope="row">
       <a href="darticulo.php?id={$fila->id}">$fila->id</a>
@@ -145,8 +151,8 @@ $valorescoincidentes=(new Articulos)->filtrar($columna,$valor);
 
     </tr>
     TEXTO;
-        }
-        ?>
+                }
+                ?>
             </tbody>
         </table>
     </div>

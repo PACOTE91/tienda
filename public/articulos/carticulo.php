@@ -11,6 +11,9 @@ use Src\Articulos;
 //     header("Location:index.php");
 // }
 
+// pattern = "^[0-9]{0,3}+([,|.][0-9]{0,2}+)?$"
+
+
 
 $categorias = (new Categorias)->devuelveNombre();
 $proximoid = (new Articulos)->proximoid();
@@ -19,7 +22,6 @@ $proximoid = (new Articulos)->proximoid();
 function hayError($n, $d)
 {
     $error = false;
-    $l = strlen($d);
 
     if (strlen($n) == 0) {
         $error = true;
@@ -28,13 +30,10 @@ function hayError($n, $d)
 
     if (strlen($d) == 0) {
         $_SESSION['errorprecio'] = "Error precio vacío";
-    }
-    $haypunto = substr($d, ($l - 3), 1);
-    //Con esto comprobamos que exise el punto antes de los ultimos dos decimales
-    if (strcmp($haypunto, ".") != 0) {
-        $_SESSION['errorprecio'] = "Error en el formato del numero";
         $error = true;
     }
+
+    //Controlamos por medio de HTML5 (pattern) que el elemento leido siga un patrón
 
 
     return $error;
@@ -133,8 +132,8 @@ body {
 
                 <div class="form-group">
                     <label for="descrip"><b>PRECIO ARTÍCULO</b></label>
-                    <input class="form-control" type="text" id="precio" maxlength="6" requiered name="precio"
-                        placeholder="Precio formato 000.00">
+                    <input class="form-control" type="text" id="precio" pattern="^[0-9]{0,3}([,\.][0-9]{0,2})?"
+                        requiered name="precio" placeholder="Precio formato 000.00">
                     <?php
                         if (isset($_SESSION['errorprecio'])) {
                             echo <<<TEXTO

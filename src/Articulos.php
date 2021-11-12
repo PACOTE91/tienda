@@ -201,7 +201,7 @@ class Articulos extends Conexion
     //Con el ID del ariculo y la columna a filtrar nos devolver el valor a partir del que filtraremos
     public function valorafiltrar($categoria, $id)
     {
-        $sql = "SELECT $categoria FROM categorias WHERE id=$id";
+        $sql = "SELECT $categoria FROM articulos WHERE id=$id";
         $stmt = parent::$conexion->prepare($sql);
         try {
             $stmt->execute();
@@ -216,11 +216,13 @@ class Articulos extends Conexion
     // devolvemos el STMT para el que mosteriormente haremos un fetch(PDO::FETCH_OBJ)
     public function filtrar($campo, $valor)
     {
-        $sql = "SELECT * WHERE $campo=$valor";
+        $sql = "SELECT * FROM articulos WHERE {$campo}=:v";
         $stmt = parent::$conexion->prepare($sql);
 
         try {
-            $stmt->execute();
+            $stmt->execute([
+                ':v' => $valor
+            ]);
         } catch (PDOException $ex) {
             die("Error al filtrar " . $ex->getMessage());
         }
